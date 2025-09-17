@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AlbumController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">musicmeter</a> &gt; <a href="index.source.html" class="el_package">br.edu.insper.musicmeter.album.controller</a> &gt; <span class="el_source">AlbumController.java</span></div><h1>AlbumController.java</h1><pre class="source lang-java linenums">package br.edu.insper.musicmeter.album.controller;
+
+import br.edu.insper.musicmeter.album.Album;
+import br.edu.insper.musicmeter.album.dto.AlbumDTO;
+import br.edu.insper.musicmeter.album.service.AlbumService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping(&quot;/album&quot;)
+<span class="fc" id="L13">public class AlbumController</span>
+{
+    @Autowired
+    private AlbumService service;
+
+    @GetMapping
+    public List&lt;Album&gt; getAlbums() {
+<span class="fc" id="L20">        return service.getAlbums();</span>
+    }
+
+    @GetMapping(&quot;/{id}&quot;)
+    public Album getAlbums(@PathVariable Integer id) {
+<span class="nc" id="L25">        return service.getAlbum(id);</span>
+    }
+
+    @PostMapping
+    public Album postAlbum(@RequestBody AlbumDTO albumDTO) {
+<span class="fc" id="L30">        return service.saveAlbum(albumDTO);</span>
+    }
+
+    @DeleteMapping(&quot;/{id}&quot;)
+    public Album deleteAlbum(@PathVariable Integer id) {
+<span class="nc" id="L35">        return service.deleteAlbum(id);</span>
+    }
+
+    @PutMapping(&quot;/{id}&quot;)
+    public Album putAlbum(@PathVariable Integer id, @RequestBody AlbumDTO albumDTO) {
+<span class="nc" id="L40">        return service.saveAlbum(albumDTO);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

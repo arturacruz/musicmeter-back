@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">musicmeter</a> &gt; <a href="index.source.html" class="el_package">br.edu.insper.musicmeter.user.controller</a> &gt; <span class="el_source">UserController.java</span></div><h1>UserController.java</h1><pre class="source lang-java linenums">package br.edu.insper.musicmeter.user.controller;
+
+import br.edu.insper.musicmeter.user.User;
+import br.edu.insper.musicmeter.user.dto.UserDTO;
+import br.edu.insper.musicmeter.user.dto.UserSaveDTO;
+import br.edu.insper.musicmeter.user.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping(&quot;/user&quot;)
+<span class="fc" id="L14">public class UserController</span>
+{
+    @Autowired
+    private UserService service;
+
+    @GetMapping
+    public List&lt;User&gt; getUsers() {
+<span class="fc" id="L21">        return service.getUsers();</span>
+    }
+
+    @GetMapping(&quot;/{id}&quot;)
+    public User getUsers(@PathVariable Integer id) {
+<span class="nc" id="L26">        return service.getUser(id);</span>
+    }
+
+    @PostMapping
+    public User postUser(@RequestBody UserSaveDTO userDTO) {
+<span class="fc" id="L31">        return service.saveUser(userDTO);</span>
+    }
+
+    @DeleteMapping(&quot;/{id}&quot;)
+    public User deleteUser(@PathVariable Integer id) {
+<span class="nc" id="L36">        return service.deleteUser(id);</span>
+    }
+
+    @PutMapping(&quot;/{id}&quot;)
+    public User putUser(@PathVariable Integer id, @RequestBody UserSaveDTO userDTO) {
+<span class="nc" id="L41">        return service.saveUser(userDTO);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
