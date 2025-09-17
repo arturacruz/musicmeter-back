@@ -10,14 +10,16 @@ import java.util.Set;
 
 @Setter
 @Getter
-//@Entity
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 public class Review
 {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User reviewer;
     private int rating;
     private String text;

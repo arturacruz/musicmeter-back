@@ -14,17 +14,16 @@ import java.util.Set;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-//@Entity
+@Entity
 public class Album
 {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
+    private String title;
     private String artist;
 
-//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JoinColumn(name = "music_album_id")
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Music> musics = new HashSet<>();
     private int rating;
 }

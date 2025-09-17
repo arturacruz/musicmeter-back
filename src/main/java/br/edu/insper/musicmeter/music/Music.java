@@ -9,18 +9,21 @@ import lombok.Setter;
 
 @Setter
 @Getter
-//@Entity
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 public class Music
 {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
+    private String title;
     private String artist;
 //    @ManyToOne
 //    @JoinColumn(name = "music_album_id", referencedColumnName = "id")
+
+    @ManyToOne
+    @JoinColumn(name = "album_id", nullable = false)
     private Album album;
     private int rating;
 }

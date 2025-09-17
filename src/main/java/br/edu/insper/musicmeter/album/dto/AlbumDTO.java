@@ -19,7 +19,7 @@ public record AlbumDTO(
     public static AlbumDTO from(Album album) {
         return new AlbumDTO(
                 album.getId(),
-                album.getName(),
+                album.getTitle(),
                 album.getArtist(),
                 album.getMusics(),
                 album.getRating()

@@ -16,19 +16,26 @@ import java.util.Set;
 
 @Setter
 @Getter
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 public class User
 {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String displayName;
     /*private Set<User> friends;*/
+
+    @OneToMany(mappedBy = "reviewer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Review> reviews = new HashSet<>();
 
+    @OneToMany
     private Set<Album> favoriteAlbums = new HashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "music_id", nullable = false)
     private Music favoriteSong;
 
     public User(String name, String displayName, Set<Review> reviews, Set<Album> favoriteAlbums, Music favoriteSong) {
@@ -49,6 +56,4 @@ public class User
     public void addReview(Review review) {
         reviews.add(review);
     }
-
-
 }

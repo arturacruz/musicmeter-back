@@ -14,7 +14,7 @@ public record MusicDTO(
     public static MusicDTO from(Music music) {
         return new MusicDTO(
                 music.getId(),
-                music.getName(),
+                music.getTitle(),
                 music.getArtist(),
                 music.getAlbum(),
                 music.getRating()
