@@ -1,0 +1,11 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+musicmeter,br.edu.insper.biblioteca.livro,Livro,0,18,0,0,0,7,0,1,0,1
+musicmeter,br.edu.insper.biblioteca.livro.dto,LivroSaveDTO,0,27,0,0,0,2,0,2,0,2
+musicmeter,br.edu.insper.biblioteca.common.exception,ResourceNotFoundException,0,11,0,0,0,4,0,2,0,2
+musicmeter,br.edu.insper.biblioteca.common.exception,IncorrectFieldUsageException,29,0,0,0,7,0,3,0,3,0
+musicmeter,br.edu.insper.biblioteca.common.error.util,ErrorUtils,25,11,0,0,5,2,3,1,3,1
+musicmeter,br.edu.insper.biblioteca.common,ControllerExceptionHandler,12,0,0,0,3,0,3,0,3,0
+musicmeter,br.edu.insper.biblioteca.common.error.dto,ErrorDTO,0,18,0,0,0,6,0,1,0,1
+musicmeter,br.edu.insper.biblioteca.livro.controller,LivroController,6,18,0,0,1,4,1,4,1,4
+musicmeter,br.edu.insper.biblioteca.livro.service,LivroService,7,37,0,2,1,9,1,5,1,4
+musicmeter,br.edu.insper.biblioteca,Main,8,0,0,0,3,0,2,0,2,0
