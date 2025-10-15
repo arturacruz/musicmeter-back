@@ -56,4 +56,4 @@ jobs:
              -e MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }} \
              -e MYSQL_HOST=mysql \
              --network=rede --name musicmeter \
-             vitorkenzo299/musicmeter-ci:${{ github.sha }}
+             vitorkenzo299/musicmeter:${{ github.sha }}
