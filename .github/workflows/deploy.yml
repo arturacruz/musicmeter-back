@@ -57,4 +57,3 @@ jobs:
              -e MYSQL_HOST=mysql \
              --network=rede --name musicmeter \
              cynthiayasutake/musicmeter:${{ github.sha }}
-
