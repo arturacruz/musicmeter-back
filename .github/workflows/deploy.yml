@@ -52,7 +52,7 @@ jobs:
           script: |
             docker stop musicmeter
             docker rm --force musicmeter
-            docker run -d -p 8082:8080 \
+            docker run -d -p 8080:8080 \
              -e MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }} \
              -e MYSQL_HOST=mysql \
              --network=rede --name musicmeter \
