@@ -25,6 +25,11 @@ public class ReviewController
         return ReviewDTO.from(service.getReview(id));
     }
 
+    @GetMapping("/album/{id}")
+    public List<ReviewDTO> getReviewsForAlbum(@PathVariable String id) {
+        return service.getAllReviewsInAlbum(id);
+    }
+
     @PostMapping
     public ReviewDTO postReview(@RequestBody ReviewSaveDTO reviewDTO) {
         return service.saveReview(reviewDTO);

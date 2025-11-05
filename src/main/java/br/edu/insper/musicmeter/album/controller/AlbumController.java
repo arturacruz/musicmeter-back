@@ -4,6 +4,9 @@ import br.edu.insper.musicmeter.album.Album;
 import br.edu.insper.musicmeter.album.dto.AlbumDTO;
 import br.edu.insper.musicmeter.album.service.AlbumService;
 import br.edu.insper.musicmeter.common.spotify.SpotifyRequester;
+import br.edu.insper.musicmeter.review.Review;
+import br.edu.insper.musicmeter.review.dto.ReviewDTO;
+import br.edu.insper.musicmeter.review.service.ReviewService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,8 @@ public class AlbumController
 {
     @Autowired
     private AlbumService service;
+    @Autowired
+    private ReviewService reviewService;
 
     @GetMapping
     public List<Album> getAlbums() {
@@ -32,7 +37,11 @@ public class AlbumController
     public JsonNode getAlbum(@PathVariable String id) {
         Album album = service.getAlbumBySpotifyId(id);
         JsonNode ret = SpotifyRequester.getAlbum(album.getSpotifyId());
-        ((ObjectNode) ret).put("rating", album.getRating());
+        List<ReviewDTO> albumReviews = reviewService.getAllReviewsInAlbum(id);
+
+        int rating = albumReviews.stream().mapToInt(ReviewDTO::rating).sum() / albumReviews.size();
+
+        ((ObjectNode) ret).put("rating", rating);
         return ret;
     }
 }
