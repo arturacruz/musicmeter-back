@@ -77,4 +77,7 @@ public class SpotifyRequester {
     }
 
 
+    public static JsonNode searchArtist(String query) {
+        return search(query, "artist");
+    }
 }
