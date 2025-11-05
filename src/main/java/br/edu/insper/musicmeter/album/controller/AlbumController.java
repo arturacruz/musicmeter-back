@@ -29,8 +29,8 @@ public class AlbumController
     }
 
     @GetMapping("/{id}")
-    public JsonNode getAlbum(@PathVariable Integer id) {
-        Album album = service.getAlbum(id);
+    public JsonNode getAlbum(@PathVariable String id) {
+        Album album = service.getAlbumBySpotifyId(id);
         JsonNode ret = SpotifyRequester.getAlbum(album.getSpotifyId());
         ((ObjectNode) ret).put("rating", album.getRating());
         return ret;
