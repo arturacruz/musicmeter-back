@@ -1,32 +1,34 @@
 package br.edu.insper.musicmeter.review.dto;
 
+import br.edu.insper.musicmeter.album.Album;
 import br.edu.insper.musicmeter.review.Review;
 import br.edu.insper.musicmeter.user.User;
 
-import java.util.Set;
-
 public record ReviewDTO(
         int id,
-        User reviewer,
+        int userId,
         int rating,
-        String text
+        String text,
+        int albumId
 ) {
 
     public static ReviewDTO from(Review review) {
         return new ReviewDTO(
             review.getId(),
-            review.getReviewer(),
+            review.getReviewer().getId(),
             review.getRating(),
-            review.getText()
+            review.getText(),
+            review.getAlbum().getId()
         );
     }
 
-    public static Review to(ReviewDTO review) {
+    public Review to(User user, Album album) {
         return new Review(
-            review.id,
-            review.reviewer,
-            review.rating,
-            review.text
+                id,
+                user,
+                rating,
+                text,
+                album
         );
     }
 }

@@ -1,14 +1,10 @@
 package br.edu.insper.musicmeter.album;
 
-import br.edu.insper.musicmeter.music.Music;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Setter
 @Getter
@@ -20,10 +16,11 @@ public class Album
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String title;
-    private String artist;
-
-    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Music> musics = new HashSet<>();
+    private String spotifyId;
     private int rating;
+
+    public Album(String spotifyId, int rating) {
+        this.spotifyId = spotifyId;
+        this.rating = rating;
+    }
 }

@@ -16,27 +16,27 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> getUsers() {
-        return userRepository.findAll();
+    public List<UserDTO> getUsers() {
+        return userRepository.findAll().stream().map(UserDTO::from).toList();
     }
 
-    public User saveUser(UserSaveDTO user) {
-        userRepository.save(UserSaveDTO.to(user));
-        return UserSaveDTO.to(user);
+    public UserDTO saveUser(UserSaveDTO user) {
+        User s = userRepository.save(UserSaveDTO.to(user));
+        return UserDTO.from(s);
     }
 
-    public User updateUser(int id, UserSaveDTO user) throws ObjectNotFoundException {
+    public UserDTO updateUser(int id, UserSaveDTO user) throws ObjectNotFoundException {
         User model = getUser(id);
         User updated = UserSaveDTO.to(user);
         updated.setId(model.getId());
         saveUser(UserSaveDTO.from(updated));
-        return updated;
+        return UserDTO.from(updated);
     }
 
-    public User deleteUser(int id) throws ObjectNotFoundException {
+    public UserDTO deleteUser(int id) throws ObjectNotFoundException {
         User user = getUser(id);
         userRepository.deleteById(id);
-        return user;
+        return UserDTO.from(user);
     }
 
     public User getUser(Integer id) throws ObjectNotFoundException {
