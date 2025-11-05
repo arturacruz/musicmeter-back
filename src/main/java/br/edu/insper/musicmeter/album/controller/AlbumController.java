@@ -3,6 +3,7 @@ package br.edu.insper.musicmeter.album.controller;
 import br.edu.insper.musicmeter.album.Album;
 import br.edu.insper.musicmeter.album.dto.AlbumDTO;
 import br.edu.insper.musicmeter.album.service.AlbumService;
+import br.edu.insper.musicmeter.common.exception.ObjectNotFoundException;
 import br.edu.insper.musicmeter.common.spotify.SpotifyRequester;
 import br.edu.insper.musicmeter.review.Review;
 import br.edu.insper.musicmeter.review.dto.ReviewDTO;
@@ -36,8 +37,14 @@ public class AlbumController
 
     @GetMapping("/{id}")
     public JsonNode getAlbum(@PathVariable String id) {
-        Album album = service.getAlbumBySpotifyId(id);
-        JsonNode ret = SpotifyRequester.getAlbum(album.getSpotifyId());
+        JsonNode ret = SpotifyRequester.getAlbum(id);
+        Album album;
+        try {
+            album = service.getAlbumBySpotifyId(id);
+        } catch (ObjectNotFoundException e) {
+            return ret;
+        }
+        
         List<ReviewDTO> albumReviews = reviewService.getAllReviewsInAlbum(id);
 
         int rating = albumReviews.stream().mapToInt(ReviewDTO::rating).sum() / albumReviews.size();
