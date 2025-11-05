@@ -38,13 +38,12 @@ public class AlbumController
     @GetMapping("/{id}")
     public JsonNode getAlbum(@PathVariable String id) {
         JsonNode ret = SpotifyRequester.getAlbum(id);
-        Album album;
         try {
-            album = service.getAlbumBySpotifyId(id);
+            service.getAlbumBySpotifyId(id);
         } catch (ObjectNotFoundException e) {
             return ret;
         }
-        
+
         List<ReviewDTO> albumReviews = reviewService.getAllReviewsInAlbum(id);
 
         int rating = albumReviews.stream().mapToInt(ReviewDTO::rating).sum() / albumReviews.size();
