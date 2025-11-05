@@ -43,6 +43,6 @@ public class ReviewController
 
     @PutMapping("/{id}")
     public ReviewDTO putReview(@PathVariable Integer id, @Valid @RequestBody ReviewSaveDTO reviewDTO) {
-        return service.saveReview(reviewDTO);
+        return service.updateReview(id, reviewDTO);
     }
 }

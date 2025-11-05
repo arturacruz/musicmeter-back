@@ -20,16 +20,16 @@ public class UserService {
         return userRepository.findAll().stream().map(UserDTO::from).toList();
     }
 
-    public UserDTO saveUser(UserSaveDTO user) {
-        User s = userRepository.save(UserSaveDTO.to(user));
-        return UserDTO.from(s);
+    public UserDTO saveUser(User user) {
+        userRepository.save(user);
+        return UserDTO.from(user);
     }
 
     public UserDTO updateUser(int id, UserSaveDTO user) throws ObjectNotFoundException {
         User model = getUser(id);
         User updated = UserSaveDTO.to(user);
         updated.setId(model.getId());
-        saveUser(UserSaveDTO.from(updated));
+        saveUser(updated);
         return UserDTO.from(updated);
     }
 

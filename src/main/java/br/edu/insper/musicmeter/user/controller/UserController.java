@@ -29,7 +29,7 @@ public class UserController
 
     @PostMapping
     public UserDTO postUser(@Valid @RequestBody UserSaveDTO userDTO) {
-        return service.saveUser(userDTO);
+        return service.saveUser(UserSaveDTO.to(userDTO));
     }
 
     @DeleteMapping("/{id}")
@@ -39,6 +39,6 @@ public class UserController
 
     @PutMapping("/{id}")
     public UserDTO putUser(@PathVariable Integer id, @Valid @RequestBody UserSaveDTO userDTO) {
-        return service.saveUser(userDTO);
+        return service.updateUser(id, userDTO);
     }
 }
