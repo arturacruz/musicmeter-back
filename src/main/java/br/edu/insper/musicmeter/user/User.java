@@ -1,7 +1,6 @@
 package br.edu.insper.musicmeter.user;
 
 import br.edu.insper.musicmeter.album.Album;
-import br.edu.insper.musicmeter.music.Music;
 import br.edu.insper.musicmeter.review.Review;
 import br.edu.insper.musicmeter.user.exception.FavoriteAlbumListFullException;
 import jakarta.persistence.*;
@@ -34,16 +33,16 @@ public class User
     @OneToMany
     private Set<Album> favoriteAlbums = new HashSet<>();
 
-    @ManyToOne
-    @JoinColumn(name = "music_id", nullable = false)
-    private Music favoriteSong;
-
-    public User(String name, String displayName, Set<Review> reviews, Set<Album> favoriteAlbums, Music favoriteSong) {
+    public User(String name, String displayName, Set<Review> reviews, Set<Album> favoriteAlbums) {
         this.name = name;
         this.displayName = displayName;
         this.reviews = reviews;
         this.favoriteAlbums = favoriteAlbums;
-        this.favoriteSong = favoriteSong;
+    }
+
+    public User(String name, String displayName) {
+        this.name = name;
+        this.displayName = displayName;
     }
 
     public void addFavoriteAlbum(Album album) throws FavoriteAlbumListFullException {

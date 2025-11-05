@@ -3,6 +3,9 @@ package br.edu.insper.musicmeter.album.controller;
 import br.edu.insper.musicmeter.album.Album;
 import br.edu.insper.musicmeter.album.dto.AlbumDTO;
 import br.edu.insper.musicmeter.album.service.AlbumService;
+import br.edu.insper.musicmeter.common.spotify.SpotifyRequester;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,23 +23,16 @@ public class AlbumController
         return service.getAlbums();
     }
 
+    @GetMapping("/search/{query}")
+    public JsonNode search(@PathVariable String query) {
+        return SpotifyRequester.searchAlbum(query);
+    }
+
     @GetMapping("/{id}")
-    public Album getAlbums(@PathVariable Integer id) {
-        return service.getAlbum(id);
-    }
-
-    @PostMapping
-    public Album postAlbum(@RequestBody AlbumDTO albumDTO) {
-        return service.saveAlbum(albumDTO);
-    }
-
-    @DeleteMapping("/{id}")
-    public Album deleteAlbum(@PathVariable Integer id) {
-        return service.deleteAlbum(id);
-    }
-
-    @PutMapping("/{id}")
-    public Album putAlbum(@PathVariable Integer id, @RequestBody AlbumDTO albumDTO) {
-        return service.saveAlbum(albumDTO);
+    public JsonNode getAlbum(@PathVariable String id) {
+        Album album = service.getAlbumBySpotifyId(id);
+        JsonNode ret = SpotifyRequester.getAlbum(album.getSpotifyId());
+        ((ObjectNode) ret).put("rating", album.getRating());
+        return ret;
     }
 }

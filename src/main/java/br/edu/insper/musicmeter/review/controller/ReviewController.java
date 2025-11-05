@@ -1,6 +1,6 @@
 package br.edu.insper.musicmeter.review.controller;
 
-import br.edu.insper.musicmeter.review.Review;
+import br.edu.insper.musicmeter.review.dto.ReviewDTO;
 import br.edu.insper.musicmeter.review.dto.ReviewSaveDTO;
 import br.edu.insper.musicmeter.review.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,27 +16,27 @@ public class ReviewController
     private ReviewService service;
 
     @GetMapping
-    public List<Review> getReviews() {
+    public List<ReviewDTO> getReviews() {
         return service.getReviews();
     }
 
     @GetMapping("/{id}")
-    public Review getReviews(@PathVariable Integer id) {
-        return service.getReview(id);
+    public ReviewDTO getReviews(@PathVariable Integer id) {
+        return ReviewDTO.from(service.getReview(id));
     }
 
     @PostMapping
-    public Review postReview(@RequestBody ReviewSaveDTO reviewDTO) {
+    public ReviewDTO postReview(@RequestBody ReviewSaveDTO reviewDTO) {
         return service.saveReview(reviewDTO);
     }
 
     @DeleteMapping("/{id}")
-    public Review deleteReview(@PathVariable Integer id) {
+    public ReviewDTO deleteReview(@PathVariable Integer id) {
         return service.deleteReview(id);
     }
 
     @PutMapping("/{id}")
-    public Review putReview(@PathVariable Integer id, @RequestBody ReviewSaveDTO reviewDTO) {
+    public ReviewDTO putReview(@PathVariable Integer id, @RequestBody ReviewSaveDTO reviewDTO) {
         return service.saveReview(reviewDTO);
     }
 }

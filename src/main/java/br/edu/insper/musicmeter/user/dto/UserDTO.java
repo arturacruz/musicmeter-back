@@ -1,20 +1,20 @@
 package br.edu.insper.musicmeter.user.dto;
 
 import br.edu.insper.musicmeter.album.Album;
-import br.edu.insper.musicmeter.music.Music;
 import br.edu.insper.musicmeter.review.Review;
 import br.edu.insper.musicmeter.user.User;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public record UserDTO(
     int id,
     String name,
     String displayName,
-    Set<Review> reviews,
-    Set<Album> albums,
-    Music favoriteSong
+    Set<Integer> reviews,
+    Set<Integer> albums
 ) {
 
     public static UserDTO from(User user) {
@@ -22,20 +22,18 @@ public record UserDTO(
             user.getId(),
             user.getName(),
             user.getDisplayName(),
-            user.getReviews(),
-            user.getFavoriteAlbums(),
-            user.getFavoriteSong()
+            user.getReviews().stream().map(Review::getId).collect(Collectors.toSet()),
+            user.getFavoriteAlbums().stream().map(Album::getId).collect(Collectors.toSet())
         );
     }
 
-    public static User to(UserDTO user) {
+    public User to(Set<Review> review, Set<Album> album) {
         return new User(
-                user.id(),
-                user.name(),
-                user.displayName(),
-                user.reviews(),
-                user.albums(),
-                user.favoriteSong()
+                id,
+                name,
+                displayName,
+                review,
+                album
         );
     }
 }

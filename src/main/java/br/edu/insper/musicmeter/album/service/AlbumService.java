@@ -20,13 +20,12 @@ public class AlbumService {
     }
 
     public Album saveAlbum(AlbumDTO album) {
-        albumRepository.save(AlbumDTO.to(album));
-        return AlbumDTO.to(album);
+        return albumRepository.save(album.to());
     }
 
     public Album updateAlbum(int id, AlbumDTO album) throws ObjectNotFoundException {
         Album model = getAlbum(id);
-        Album updated = AlbumDTO.to(album);
+        Album updated = album.to();
         updated.setId(model.getId());
         saveAlbum(AlbumDTO.from(updated));
         return updated;
@@ -41,7 +40,15 @@ public class AlbumService {
     public Album getAlbum(Integer id) throws ObjectNotFoundException {
         Optional<Album> album = albumRepository.findById(id);
         if(album.isEmpty()) {
-            throw new ObjectNotFoundException("");
+            throw new ObjectNotFoundException("album not found");
+        }
+        return album.get();
+    }
+
+    public Album getAlbumBySpotifyId(String id) throws ObjectNotFoundException {
+        Optional<Album> album = albumRepository.findBySpotifyId(id);
+        if(album.isEmpty()) {
+            throw new ObjectNotFoundException("album not found");
         }
         return album.get();
     }
