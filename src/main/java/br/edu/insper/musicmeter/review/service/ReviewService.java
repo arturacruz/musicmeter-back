@@ -35,7 +35,7 @@ public class ReviewService {
         try {
             album = albumService.getAlbumBySpotifyId(review.albumId());
         } catch (ObjectNotFoundException e) {
-            album = albumService.saveAlbum(AlbumDTO.from(new Album(review.albumId(), review.rating())));
+            album = albumService.saveAlbum(AlbumDTO.from(new Album(review.albumId())));
         }
         Review rev = review.to(user, album);
         reviewRepository.save(rev);
@@ -63,5 +63,9 @@ public class ReviewService {
             throw new ObjectNotFoundException("");
         }
         return review.get();
+    }
+
+    public List<ReviewDTO> getAllReviewsInAlbum(String id) {
+        return reviewRepository.findAllByAlbumSpotifyId(id).stream().map(ReviewDTO::from).toList();
     }
 }

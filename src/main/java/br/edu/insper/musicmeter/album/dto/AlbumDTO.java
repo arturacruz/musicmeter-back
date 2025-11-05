@@ -3,21 +3,18 @@ package br.edu.insper.musicmeter.album.dto;
 import br.edu.insper.musicmeter.album.Album;
 
 public record AlbumDTO(
-        String spotifyId,
-        int rating
+        String spotifyId
 ) {
 
     public static AlbumDTO from(Album album) {
         return new AlbumDTO(
-                album.getSpotifyId(),
-                album.getRating()
+                album.getSpotifyId()
         );
     }
 
     public Album to() {
         return new Album(
-                spotifyId,
-                rating
+                spotifyId
         );
     }
 }

@@ -17,10 +17,8 @@ public class Album
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String spotifyId;
-    private int rating;
 
-    public Album(String spotifyId, int rating) {
+    public Album(String spotifyId) {
         this.spotifyId = spotifyId;
-        this.rating = rating;
     }
 }
