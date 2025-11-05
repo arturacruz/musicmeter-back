@@ -3,12 +3,14 @@ package br.edu.insper.musicmeter.review.dto;
 import br.edu.insper.musicmeter.album.Album;
 import br.edu.insper.musicmeter.review.Review;
 import br.edu.insper.musicmeter.user.User;
+import jakarta.validation.constraints.NotEmpty;
+import org.springframework.lang.NonNull;
 
 public record ReviewSaveDTO(
-        int userId,
-        int rating,
-        String text,
-        String albumId
+        @NonNull int userId,
+        @NonNull int rating,
+        @NonNull @NotEmpty String text,
+        @NonNull @NotEmpty String albumId
 ) {
 
     public static ReviewSaveDTO from(Review review) {

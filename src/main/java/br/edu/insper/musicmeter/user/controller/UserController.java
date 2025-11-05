@@ -4,6 +4,7 @@ import br.edu.insper.musicmeter.user.User;
 import br.edu.insper.musicmeter.user.dto.UserDTO;
 import br.edu.insper.musicmeter.user.dto.UserSaveDTO;
 import br.edu.insper.musicmeter.user.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public class UserController
     }
 
     @PostMapping
-    public UserDTO postUser(@RequestBody UserSaveDTO userDTO) {
+    public UserDTO postUser(@Valid @RequestBody UserSaveDTO userDTO) {
         return service.saveUser(userDTO);
     }
 
@@ -37,7 +38,7 @@ public class UserController
     }
 
     @PutMapping("/{id}")
-    public UserDTO putUser(@PathVariable Integer id, @RequestBody UserSaveDTO userDTO) {
+    public UserDTO putUser(@PathVariable Integer id, @Valid @RequestBody UserSaveDTO userDTO) {
         return service.saveUser(userDTO);
     }
 }

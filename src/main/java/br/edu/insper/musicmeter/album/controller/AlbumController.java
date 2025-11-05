@@ -9,6 +9,7 @@ import br.edu.insper.musicmeter.review.dto.ReviewDTO;
 import br.edu.insper.musicmeter.review.service.ReviewService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

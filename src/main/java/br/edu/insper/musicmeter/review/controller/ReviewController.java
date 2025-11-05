@@ -3,6 +3,7 @@ package br.edu.insper.musicmeter.review.controller;
 import br.edu.insper.musicmeter.review.dto.ReviewDTO;
 import br.edu.insper.musicmeter.review.dto.ReviewSaveDTO;
 import br.edu.insper.musicmeter.review.service.ReviewService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +32,7 @@ public class ReviewController
     }
 
     @PostMapping
-    public ReviewDTO postReview(@RequestBody ReviewSaveDTO reviewDTO) {
+    public ReviewDTO postReview(@Valid @RequestBody ReviewSaveDTO reviewDTO) {
         return service.saveReview(reviewDTO);
     }
 
@@ -41,7 +42,7 @@ public class ReviewController
     }
 
     @PutMapping("/{id}")
-    public ReviewDTO putReview(@PathVariable Integer id, @RequestBody ReviewSaveDTO reviewDTO) {
+    public ReviewDTO putReview(@PathVariable Integer id, @Valid @RequestBody ReviewSaveDTO reviewDTO) {
         return service.saveReview(reviewDTO);
     }
 }
