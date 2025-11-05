@@ -40,7 +40,15 @@ public class AlbumService {
     public Album getAlbum(Integer id) throws ObjectNotFoundException {
         Optional<Album> album = albumRepository.findById(id);
         if(album.isEmpty()) {
-            throw new ObjectNotFoundException("");
+            throw new ObjectNotFoundException("album not found");
+        }
+        return album.get();
+    }
+
+    public Album getAlbumBySpotifyId(String id) throws ObjectNotFoundException {
+        Optional<Album> album = albumRepository.findBySpotifyId(id);
+        if(album.isEmpty()) {
+            throw new ObjectNotFoundException("album not found");
         }
         return album.get();
     }

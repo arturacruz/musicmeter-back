@@ -43,8 +43,6 @@ public class User
     public User(String name, String displayName) {
         this.name = name;
         this.displayName = displayName;
-        this.reviews = null;
-        this.favoriteAlbums = null;
     }
 
     public void addFavoriteAlbum(Album album) throws FavoriteAlbumListFullException {

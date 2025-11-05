@@ -35,19 +35,4 @@ public class AlbumController
         ((ObjectNode) ret).put("rating", album.getRating());
         return ret;
     }
-
-    @PostMapping
-    public Album postAlbum(@RequestBody AlbumDTO albumDTO) {
-        return service.saveAlbum(albumDTO);
-    }
-
-    @DeleteMapping("/{id}")
-    public Album deleteAlbum(@PathVariable Integer id) {
-        return service.deleteAlbum(id);
-    }
-
-    @PutMapping("/{id}")
-    public Album putAlbum(@PathVariable Integer id, @RequestBody AlbumDTO albumDTO) {
-        return service.saveAlbum(albumDTO);
-    }
 }

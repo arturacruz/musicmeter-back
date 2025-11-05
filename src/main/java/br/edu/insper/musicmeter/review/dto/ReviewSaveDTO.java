@@ -8,7 +8,7 @@ public record ReviewSaveDTO(
         int userId,
         int rating,
         String text,
-        int albumId
+        String albumId
 ) {
 
     public static ReviewSaveDTO from(Review review) {
@@ -16,7 +16,7 @@ public record ReviewSaveDTO(
                 review.getReviewer().getId(),
                 review.getRating(),
                 review.getText(),
-                review.getAlbum().getId()
+                review.getAlbum().getSpotifyId()
         );
     }
 

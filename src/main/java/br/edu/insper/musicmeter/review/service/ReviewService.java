@@ -1,6 +1,7 @@
 package br.edu.insper.musicmeter.review.service;
 
 import br.edu.insper.musicmeter.album.Album;
+import br.edu.insper.musicmeter.album.dto.AlbumDTO;
 import br.edu.insper.musicmeter.album.service.AlbumService;
 import br.edu.insper.musicmeter.common.exception.ObjectNotFoundException;
 import br.edu.insper.musicmeter.review.Review;
@@ -30,7 +31,12 @@ public class ReviewService {
 
     public ReviewDTO saveReview(ReviewSaveDTO review) {
         User user = userService.getUser(review.userId());
-        Album album = albumService.getAlbum(review.albumId());
+        Album album;
+        try {
+            album = albumService.getAlbumBySpotifyId(review.albumId());
+        } catch (ObjectNotFoundException e) {
+            album = albumService.saveAlbum(AlbumDTO.from(new Album(review.albumId(), review.rating())));
+        }
         Review rev = review.to(user, album);
         reviewRepository.save(rev);
         return ReviewDTO.from(rev);
@@ -39,7 +45,7 @@ public class ReviewService {
     public ReviewDTO updateReview(int id, ReviewSaveDTO review) throws ObjectNotFoundException {
         Review model = getReview(id);
         User user = userService.getUser(review.userId());
-        Album album = albumService.getAlbum(review.albumId());
+        Album album = albumService.getAlbumBySpotifyId(review.albumId());
         Review updated = review.to(user, album);
         updated.setId(model.getId());
         return saveReview(ReviewSaveDTO.from(updated));
